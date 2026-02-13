@@ -1,0 +1,228 @@
+:root {
+  --primary: #000f2f;
+  --accent: #ffb81c;
+  --ink: #f6f8ff;
+  --muted: #b8c2dc;
+  --panel: #09173f;
+  --panel-border: rgba(255, 184, 28, 0.3);
+  --success: #35d081;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  margin: 0;
+  min-height: 100%;
+}
+
+body {
+  font-family: 'Avenir Next', 'Segoe UI', sans-serif;
+  color: var(--ink);
+  background:
+    radial-gradient(circle at 16% 12%, rgba(255, 184, 28, 0.2), transparent 42%),
+    radial-gradient(circle at 80% 0%, rgba(21, 52, 121, 0.8), transparent 45%),
+    var(--primary);
+}
+
+.app-shell {
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: clamp(0.8rem, 2vw, 1.5rem);
+  display: grid;
+  gap: 1rem;
+}
+
+.app-header {
+  background: linear-gradient(145deg, rgba(0, 15, 47, 0.88), rgba(9, 23, 63, 0.9));
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: clamp(0.8rem, 2vw, 1.2rem);
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1,
+h2,
+h3 {
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', sans-serif;
+  letter-spacing: 0.02em;
+}
+
+h1 {
+  font-size: clamp(1.35rem, 3vw, 2rem);
+}
+
+h2 {
+  font-size: clamp(1.1rem, 2.5vw, 1.45rem);
+}
+
+h3 {
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  color: var(--accent);
+}
+
+.panel {
+  background: linear-gradient(165deg, rgba(9, 23, 63, 0.95), rgba(5, 14, 38, 0.95));
+  border: 1px solid var(--panel-border);
+  border-radius: 14px;
+  padding: clamp(0.75rem, 2vw, 1.2rem);
+  display: grid;
+  gap: 0.75rem;
+}
+
+.panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 0.7rem;
+  flex-wrap: wrap;
+}
+
+.progress {
+  color: var(--muted);
+  font-size: clamp(0.85rem, 1.9vw, 1rem);
+}
+
+.stage-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(220px, 1fr);
+  gap: 0.8rem;
+  align-items: stretch;
+}
+
+.scene {
+  margin: 0;
+  position: relative;
+  width: 100%;
+  min-height: clamp(260px, 48vw, 460px);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 184, 28, 0.25);
+}
+
+.art {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.hotspot-layer {
+  position: absolute;
+  inset: 0;
+}
+
+.hotspot {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  padding: 0.22rem 0.42rem;
+  min-height: 34px;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 184, 28, 0.85);
+  color: #061538;
+  background: rgba(255, 184, 28, 0.87);
+  cursor: pointer;
+  font-size: clamp(0.7rem, 1.45vw, 0.82rem);
+  font-weight: 700;
+  box-shadow: 0 0 0 0 rgba(255, 184, 28, 0.3);
+  transition: transform 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.hotspot span {
+  white-space: nowrap;
+}
+
+.hotspot:hover,
+.hotspot:focus-visible,
+.hotspot.active {
+  outline: none;
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 0 0 6px rgba(255, 184, 28, 0.22);
+}
+
+.hotspot.found {
+  background: var(--success);
+  border-color: rgba(53, 208, 129, 0.9);
+}
+
+.callout {
+  border: 1px solid rgba(255, 184, 28, 0.2);
+  background: rgba(4, 12, 33, 0.82);
+  border-radius: 12px;
+  padding: 0.9rem;
+  display: grid;
+  gap: 0.5rem;
+  align-content: start;
+}
+
+.callout p {
+  line-height: 1.4;
+  color: #dce4f8;
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  padding-bottom: 0.2rem;
+}
+
+.restart {
+  border: 1px solid var(--accent);
+  background: transparent;
+  color: var(--accent);
+  border-radius: 10px;
+  padding: 0.62rem 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease;
+}
+
+.restart:hover,
+.restart:focus-visible {
+  outline: none;
+  background: var(--accent);
+  color: #0d1738;
+}
+
+@media (max-width: 900px) {
+  .stage-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .scene {
+    min-height: clamp(250px, 70vw, 430px);
+  }
+
+  .actions {
+    justify-content: stretch;
+  }
+
+  .restart {
+    width: 100%;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) {
+  .app-shell {
+    gap: 0.7rem;
+    padding: 0.65rem;
+  }
+
+  .scene {
+    min-height: clamp(190px, 52vh, 300px);
+  }
+
+  .callout p {
+    font-size: 0.92rem;
+  }
+}
